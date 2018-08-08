@@ -337,15 +337,22 @@ function filtraCotizacion(){
         dataType : "html",
         async:false,
         success : function(data) {
-            $('#tblActComercial').dataTable().fnDestroy(); 
+            $('#tblActComercial').DataTable().fnDestroy(); 
             $("#tblActComercial").find("tbody").html(data);  
-            $('#tblActComercial').dataTable( {//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+            var total = 0;
+            var tabla = $('#tblActComercial').DataTable( {//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
                 bFilter: false, bInfo: false,
                 "bLengthChange": false,
                 "bAutoWidth": false,
                "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [1,2,3,4,5,6,7,8] }]
             });
+            //Se recorre cada fila del resultado
+            $.each(tabla.fnGetNodes(), function(i, row){
+                $row = $(row);
+                total += parseInt($row.find("td:nth-child(8)").text().trim().replace(/\./g, ""));
+            });
+            $(".thTotal").html(total.toLocaleString('de-DE'));
             //$("#tblActComercial").find("tbody").html(data);  
         }
     });

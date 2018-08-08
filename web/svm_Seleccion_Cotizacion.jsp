@@ -71,6 +71,19 @@
 .paging_full_numbers a.paginate_active {
     color: #fff !important;
 }
+
+table tfoot tr th{
+    border-top: 1px solid #585858;
+    background: #DFFFDE;
+}
+
+table tfoot tr th.pull-right{
+    text-align: right;
+}
+
+table tfoot tr th.borderLeft{
+    border-left: 1px solid #6E6E6E;
+}
 </style>
 <%  
     HttpSession s = request.getSession();
@@ -118,7 +131,7 @@
 %>
 <script type="text/javascript">
 $(document).ready(function(){
-   $('#tblActComercial').dataTable( {//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+   $('#tblActComercial').DataTable( {//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
         "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
         bFilter: false, bInfo: false,
         "bLengthChange": false,
@@ -382,6 +395,7 @@ function getUrlParameter(sParam) {
                                 final ResultSet rs = sp_usu.getResultSet();
                                 
                                 String cla = "";
+                                Integer total = 0;
                                 while(rs.next())
                                 {
                                     if(cont % 2 == 0)
@@ -393,6 +407,8 @@ function getUrlParameter(sParam) {
 
                                     }
                                     out.println("<tr id='filaTablaActComercial"+cont+"' class='"+cla+"'>");
+                                    
+                                    String totalBruto = rs.getString("total_bruto");
                             %>
                             <td>
                                 <!--a href="javascript: onclick=ModificaActComercial(<%--cont--%>)"> >></a-->
@@ -409,14 +425,21 @@ function getUrlParameter(sParam) {
                             <td id="rut_cli<%=cont%>"><%= rs.getString("rut_cli")%></td>
                             <td id="razon_cli<%=cont%>"><%= rs.getString("razon_social")%></td>
                             <td id="estado<%=cont%>"><%= rs.getString("estado")%></td>
-                            <td id="total<%=cont%>"><%= rs.getString("total_bruto")%></td>
+                            <td id="total<%=cont%>"><%= totalBruto%></td>
                             <td style="display: none" id="secuencia<%=cont%>"><%= rs.getString("dias_habiles")%></td>
                             <%
+                                    total += Integer.parseInt(totalBruto.replace(".", ""));
                                     out.println("</tr>");                                   
                                     cont ++;                                    
                                 }   
                             %>     
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="7" class="pull-right">Total</th>
+                                <th class="borderLeft thTotal"><%=total.toString()%></th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </td>
@@ -435,6 +458,7 @@ function getUrlParameter(sParam) {
             </td>	
         </tr>
     </table>                            
-</body>
+</body>                
+<script src="js/autoNumeric.js" type="text/javascript" ></script>
 </html>
     
