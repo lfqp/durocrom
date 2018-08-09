@@ -345,14 +345,14 @@ function filtraCotizacion(){
                 bFilter: false, bInfo: false,
                 "bLengthChange": false,
                 "bAutoWidth": false,
-               "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [1,2,3,4,5,6,7,8] }]
+                "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [1,2,3,4,5,6,7,8,9] }]
             });
             //Se recorre cada fila del resultado
             $.each(tabla.fnGetNodes(), function(i, row){
                 $row = $(row);
-                total += parseInt($row.find("td:nth-child(8)").text().trim().replace(/\./g, ""));
+                total += parseInt($row.find("td.columnaTotal").text().replace(/\./g, "").replace(/\$/g, "").trim());
             });
-            $(".thTotal").html(total.toLocaleString('de-DE'));
+            $(".thTotal").html("$ "+total.toLocaleString('de-DE'));
             //$("#tblActComercial").find("tbody").html(data);  
         }
     });

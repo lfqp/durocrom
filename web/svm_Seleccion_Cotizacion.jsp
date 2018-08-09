@@ -136,7 +136,7 @@ $(document).ready(function(){
         bFilter: false, bInfo: false,
         "bLengthChange": false,
         "bAutoWidth": false,
-       "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [1,2,3,4,5,6,7,8] }]
+       "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [1,2,3,4,5,6,7,8,9] }]
     });
     filtraCotizacion();
 });
@@ -353,91 +353,17 @@ function getUrlParameter(sParam) {
                                 <th width="6.17%">Rut Cliente</th>
                                 <th width="19.03%">Raz&oacute;n</th>
                                 <th width="7.26%">Estado</th>
+                                <th width="7.26%">Numero OT</th>
                                 <th width="7.14%">Total</th>
                             </tr>
                         </thead>                        
                         <tbody>                            
-                            <%                                
-                                String var = "select_all";
-                                
-                                CallableStatement sp_usu = _connMy.prepareCall("{call sp_cotizacion(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
-                                sp_usu.setString(1,var);
-                                sp_usu.setInt(2,0);
-                                sp_usu.setDate(3,null);
-                                sp_usu.setString(4,"");
-                                sp_usu.setInt(5,0);
-                                sp_usu.setInt(6,0);
-                                sp_usu.setString(7,"");
-                                sp_usu.setString(8,"");
-                                sp_usu.setString(9,"");
-                                sp_usu.setString(10,"");
-                                sp_usu.setDate(11,null);
-                                sp_usu.setInt(12,0);
-                                sp_usu.setString(13,"");
-                                sp_usu.setString(14,"");
-                                sp_usu.setString(15,"");
-                                sp_usu.setString(16,"");
-                                sp_usu.setString(17,"");
-                                sp_usu.setString(18,"");
-                                sp_usu.setString(19,"");
-                                sp_usu.setString(20,"");
-                                sp_usu.setString(21,"");
-                                sp_usu.setString(22,"");
-                                sp_usu.setString(23,"");
-                                sp_usu.setString(24,"");
-                                sp_usu.setInt(25,0);
-                                sp_usu.setString(26,"");
-                                sp_usu.setString(27,"");
-                                sp_usu.setString(28,"");
-                                sp_usu.registerOutParameter(1, Types.VARCHAR);                                                          
-                                sp_usu.execute();
-                                
-                                final ResultSet rs = sp_usu.getResultSet();
-                                
-                                String cla = "";
-                                Integer total = 0;
-                                while(rs.next())
-                                {
-                                    if(cont % 2 == 0)
-                                    {
-                                        cla = "alt";
-                                    }else
-                                    {  
-                                        cla = "";
-
-                                    }
-                                    out.println("<tr id='filaTablaActComercial"+cont+"' class='"+cla+"'>");
-                                    
-                                    String totalBruto = rs.getString("total_bruto");
-                            %>
-                            <td>
-                                <!--a href="javascript: onclick=ModificaActComercial(<%--cont--%>)"> >></a-->
-                                <a href="javascript: onclick=ModificaActComercial(<%=cont%>,<%= rs.getString("ots")%>,<%= rs.getString("numero_cotizacion")%>,'<%= rs.getString("estado")%>')"> >></a>
-                                <input type="hidden" value="0" id="habilitaActCom" name="habilitaActCom" />
-                                <input type="hidden" value="" id="corrCotiza" />
-                                <input type="hidden" value="" id="nroOts" />
-                                <input type="hidden" value="" id="nroCoti" />
-                                <input type="hidden" value="" id="estadoCoti" />
-                            </td>
-                            <td id="num_cotizacion<%=cont%>"><%= rs.getString("numero_cotizacion")%></td>
-                            <td id="emititda_por<%=cont%>"><%= rs.getString("vendedor")%></td>
-                            <td id="fecha_emision<%=cont%>"><%=rs.getString("fecha_emision")%></td>
-                            <td id="rut_cli<%=cont%>"><%= rs.getString("rut_cli")%></td>
-                            <td id="razon_cli<%=cont%>"><%= rs.getString("razon_social")%></td>
-                            <td id="estado<%=cont%>"><%= rs.getString("estado")%></td>
-                            <td id="total<%=cont%>"><%= totalBruto%></td>
-                            <td style="display: none" id="secuencia<%=cont%>"><%= rs.getString("dias_habiles")%></td>
-                            <%
-                                    total += Integer.parseInt(totalBruto.replace(".", ""));
-                                    out.println("</tr>");                                   
-                                    cont ++;                                    
-                                }   
-                            %>     
+                               
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="7" class="pull-right">Total</th>
-                                <th class="borderLeft thTotal"><%=total.toString()%></th>
+                                <th colspan="8" class="pull-right">Total</th>
+                                <th class="borderLeft thTotal">0</th>
                             </tr>
                         </tfoot>
                     </table>

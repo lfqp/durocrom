@@ -106,7 +106,6 @@ public class ServletSPOrdenTaller extends HttpServlet {
                         salida += "<td id='descPieza"+cont+"'>"+rs.getString("desc_pieza")+"</td>";
                         salida += "<td id='diametro"+cont+"'>"+rs.getString("diametro_interno")+"</td>";
                         salida += "<td id='largo"+cont+"'>"+rs.getString("largo")+"</td>";
-                        salida += "<td id='totalNeto"+cont+"'>$"+nf.format(Integer.parseInt(rs.getString("total_pieza")))+"</td>";
                         salida += "<td id='fecha_termino"+cont+"'>"+rs.getString("fecha_prometida")+"</td>";
                         salida += "<td id='condicion"+cont+"'>"+rs.getString("condicion")+"</td>";
                         salida += "<td id='num_cotizacion"+cont+"'>"+rs.getString("numero_cotizacion")+"</td>";                        
@@ -114,6 +113,7 @@ public class ServletSPOrdenTaller extends HttpServlet {
                         salida += "<td id='estado"+cont+"'>"+rs.getString("estado")+"</td>";
                         salida += "<td id='cantidad"+cont+"'>"+rs.getString("cantidad")+"</td>";
                         salida += "<td id='saldo"+cont+"'>"+rs.getString("saldo")+"</td>";
+                        salida += "<td id='totalNeto"+cont+"' class=\"columnaTotal\">$ "+nf.format(Integer.parseInt(rs.getString("total_pieza")))+"</td>";
                         salida += "<td style='display: none' id='secuencia"+cont+"'></td>";
                         salida += "</tr>";
 

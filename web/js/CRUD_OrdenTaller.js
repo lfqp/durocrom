@@ -99,16 +99,22 @@ function filtraOrdenTaller() {
         dataType: "html",
         async:false,
         success: function (data) {                        
-            
             $('#tblOrdenTaller').dataTable().fnDestroy();           
             $("#tblOrdenTaller").find("tbody").html(data);
-            $('#tblOrdenTaller').dataTable({//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
+            var total = 0;
+            var tabla = $('#tblOrdenTaller').DataTable({//CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
                 "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
                 bFilter: false, bInfo: false,
                 "bLengthChange": false,
                  "bAutoWidth": false,
                 "aoColumnDefs": [{'bSortable': false, 'aTargets': [1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15] }]
             });
+            //Se recorre cada fila del resultado
+            $.each(tabla.fnGetNodes(), function(i, row){
+                $row = $(row);
+                total += parseInt($row.find("td.columnaTotal").text().replace(/\./g, "").replace(/\$/g, "").trim());
+            });
+            $(".thTotal").html("$ "+total.toLocaleString('de-DE'));
         }
     });
 }

@@ -73,6 +73,19 @@
 .paging_full_numbers a.paginate_active {
     color: #fff !important;
 }
+
+table tfoot tr th{
+    border-top: 1px solid #585858;
+    background: #DFFFDE;
+}
+
+table tfoot tr th.pull-right{
+    text-align: right;
+}
+
+table tfoot tr th.borderLeft{
+    border-left: 1px solid #6E6E6E;
+}
 </style>
 <%  
     HttpSession s = request.getSession();
@@ -297,19 +310,20 @@ function getUrlParameter(sParam) {
                                 <th>Pieza</th>
                                 <th>Di&aacute;metro</th>  
                                 <th>Largo</th>
-                                <th>Total Neto</th>
                                 <th >Fecha Prometida</th>
                                 <th>Condici&oacute;n</th>                                                                  
                                 <th >N&uacute;mero Cotizaci&oacute;n</th>                                
                                 <th >Fecha Emisi&oacute;n</th>
                                 <th >Estado</th>
                                 <th >Cantidad</th>
-                                <th >Saldo</th>                             
+                                <th >Saldo</th>
+                                <th>Total Neto</th>
                             </tr>
                         </thead>                        
                         <tbody>                            
                             <%                                
                                 String var = "select_all";
+                                Integer total = 0;
                                 
                                 CallableStatement sp_usu = _connMy.prepareCall("{call sp_ordentaller(?,?,?,?,?,?)}");
                                 sp_usu.setString(1,var);
@@ -344,22 +358,29 @@ function getUrlParameter(sParam) {
                             <td id="descPieza<%=cont%>"><%= rs.getString("desc_pieza")%></td>
                             <td id="diametro<%=cont%>"><%= rs.getString("diametro_interno")%></td>
                             <td id="largo<%=cont%>"><%= rs.getString("largo")%></td>
-                            <td id="totalNeto<%=cont%>">$<%=nf.format(Integer.parseInt(rs.getString("total_pieza")))%></td>
                             <td id="fecha_termino<%=cont%>"><%= rs.getString("fecha_prometida")%></td>
                             <td id="condicion<%=cont%>"><%= rs.getString("condicion")%></td>                                                                                    
                             <td id="num_cotizacion<%=cont%>"><%= rs.getString("numero_cotizacion")%></td>                              
                             <td id="fecha_emision<%=cont%>"><%=rs.getString("fecha_emision")%></td>                                                                                    
                             <td id="estado<%=cont%>"><%= rs.getString("estado")%></td>                            
                             <td id="cantidad<%=cont%>"><%= rs.getString("cantidad")%></td>
-                            <td id="saldo<%=cont%>"><%= rs.getString("saldo")%></td>                            
+                            <td id="saldo<%=cont%>"><%= rs.getString("saldo")%></td>
+                            <td id="totalNeto<%=cont%>" class="columnaTotal">$ <%=nf.format(Integer.parseInt(rs.getString("total_pieza")))%></td>
                             <td style="display: none" id="secuencia<%=cont%>"></td>
                             <%
+                                    total += Integer.parseInt(rs.getString("total_pieza"));
                                     //rs.getString("secuencia");
                                     out.println("</tr>");                                   
                                     cont ++;                                    
                                 }   
                             %>     
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="14" class="pull-right">Total</th>
+                                <th class="borderLeft thTotal">$ <%=nf.format(total)%></th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </td>

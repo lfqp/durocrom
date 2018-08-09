@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.Types;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -184,6 +185,7 @@ public class ServletSPCotizacion extends HttpServlet {
                     
                     String cla = "";
                     int cont =0; 
+                    String numeroOT;
                     while(rs.next())
                     {
                         if(cont % 2 == 0)
@@ -193,6 +195,17 @@ public class ServletSPCotizacion extends HttpServlet {
                         {  
                             cla = "";
 
+                        }
+                        
+                        numeroOT = rs.getString("numero_OT");
+                        if(numeroOT == null)
+                            numeroOT = "-";
+                        else{
+                            //Separamos el numeroOT por el pipe (el -1, es para que revise todo el string)
+                            //Dejándolo en un array de Strings
+                            String[] array = numeroOT.split("\\|", -1);
+                            //En la posicion 0 nos deja el valor que buscamos, asi que ese lo asignamos a la variable del numeroOT
+                            numeroOT = array[0];
                         }
                         
                         salida += "<tr id='filaTablaActComercial"+cont+"' class='"+cla+"'>";
@@ -211,7 +224,8 @@ public class ServletSPCotizacion extends HttpServlet {
                         salida +="<td id=\"rut_cli"+cont+"\">"+ rs.getString("rut_cli")+"</td>";
                         salida +="<td id=\"razon_cli"+cont+"\">"+rs.getString("razon_social")+"</td>";
                         salida +="<td id=\"estado"+cont+"\">"+rs.getString("estado")+"</td>";
-                        salida +="<td id=\"total"+cont+"\">"+rs.getString("total_bruto")+"</td>";
+                        salida +="<td id=\"num_ot"+cont+"\">"+numeroOT+"</td>";
+                        salida +="<td id=\"total"+cont+"\" class=\"columnaTotal\">$ "+rs.getString("total_bruto")+"</td>";
                         salida +="<td style=\"display: none\" id=\"secuencia"+cont+"\">"+rs.getString("secuencia")+"</td>";
                         salida +="</tr>";
                         
