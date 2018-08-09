@@ -84,6 +84,10 @@ table tfoot tr th.pull-right{
 table tfoot tr th.borderLeft{
     border-left: 1px solid #6E6E6E;
 }
+
+.columnaTotal {
+    min-width: 70px;
+}
 </style>
 <%  
     HttpSession s = request.getSession();
