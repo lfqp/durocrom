@@ -241,7 +241,7 @@ function getUrlParameter(sParam) {
                                     Calendar.setup({ 
                                     inputField     :    "txt_filtroComercial_ingreso",     // id del campo de texto 
                                     ifFormat     :     "%d-%m-%Y",     // formato de la fecha que se escriba en el campo de texto 
-                                    button     :    "lanzador"     // el id del botón que lanzará el calendario 
+                                    button     :    "lanzador"     // el id del botÃ³n que lanzarÃ¡ el calendario 
                                     }); 
                                 </script>
                             </td>
@@ -254,7 +254,7 @@ function getUrlParameter(sParam) {
                                     Calendar.setup({ 
                                     inputField     :    "txt_filtroComercial_final",     // id del campo de texto 
                                     ifFormat     :     "%d-%m-%Y",     // formato de la fecha que se escriba en el campo de texto 
-                                    button     :    "lanza"     // el id del botón que lanzará el calendario 
+                                    button     :    "lanza"     // el id del botÃ³n que lanzarÃ¡ el calendario 
                                     }); 
                                 </script>
                                 <!--Codigo Sistemas SA-->
@@ -297,17 +297,14 @@ function getUrlParameter(sParam) {
                                     %>
                                 </select>
                             </td>
-                                <td> &nbsp;N°&nbsp;Cotización</td>
+                                <td> &nbsp;NÂ°&nbsp;CotizaciÃ³n</td>                               
                                 <td> 
                                     <select id="slt_filtroComercial_nrocotizacion" name="slt_filtroComercial_nrocotizacion">
                                      <option value="">--Seleccione--</option>
                                        <%                                   
                                         stmt = _connMy.createStatement();
-
                                         q="select numero_cotizacion from svm_cotizaciones_head ";
-
                                         rsQuery = stmt.executeQuery(q);
-
                                         while(rsQuery.next())
                                         {
                                             out.println("<option value='"+rsQuery.getString("numero_cotizacion")+"'>"+rsQuery.getString("numero_cotizacion")+"</option>");
@@ -316,24 +313,22 @@ function getUrlParameter(sParam) {
                                     </select>
                                 </td>
                                 
-                                <td> &nbsp;N°&nbsp;OT</td>
+                                <td> &nbsp;NÂ°&nbsp;OT</td>
                                 <td>
                                     <select id="slt_filtroComercial_nrOT" name="slt_filtroComercial_nrOT">
                                      <option value="">--Seleccione--</option>
                                       <%                                   
                                         stmt = _connMy.createStatement();
-
-                                        q="select numero_cotizacion from svm_cotizaciones_head ";
-
+                                        q="SELECT (SUBSTRING_INDEX (numero_ordentaller , '|' , '1')) as consulta FROM svm_ordenestaller ";
                                         rsQuery = stmt.executeQuery(q);
-
                                         while(rsQuery.next())
                                         {
-                                            out.println("<option value='"+rsQuery.getString("numero_cotizacion")+"'>"+rsQuery.getString("numero_cotizacion")+"</option>");
+                                            out.println("<option value='"+rsQuery.getString("consulta")+"'>"+rsQuery.getString("consulta")+"</option>");
                                         }
                                     %>
                                     </select>
                                 </td>
+				
                             <td colspan="2">
                                &nbsp;&nbsp;
                                 <input class ="botonera" type="submit" name="btnBuscar" onclick="filtraCotizacion()" value="Buscar" />                                                            
