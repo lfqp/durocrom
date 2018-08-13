@@ -62,13 +62,15 @@ public class ServletSPGeneraOT extends HttpServlet {
 //                if (valorSalida.equalsIgnoreCase("error ejecucion")) {
 //                    out.println("Error");
 //                }
-                sp_usu = _connMy.prepareCall("{call sp_ordentaller(?,?,?,?,?,?)}");
+                sp_usu = _connMy.prepareCall("{call sp_ordentaller(?,?,?,?,?,?,?,?)}");
                 sp_usu.setString(1, opcion);
                 sp_usu.setString(2, "");
                 sp_usu.setInt(3, Integer.parseInt(numeroCotiza));
                 sp_usu.setString(4, "");
                 sp_usu.setString(5, "");
                 sp_usu.setString(6, "");
+                sp_usu.setString(7, "");
+                sp_usu.setString(8, "");
                 sp_usu.registerOutParameter(1, Types.VARCHAR);
 
                 sp_usu.execute();

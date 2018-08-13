@@ -154,7 +154,7 @@ $(document).ready(function(){
         "bAutoWidth": false,
        "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] }]
     });
-    //filtraOrdenTaller();
+    filtraOrdenTaller();
 });
 
 function seleccion_registro_actividadComercial(id){
@@ -325,64 +325,12 @@ function getUrlParameter(sParam) {
                             </tr>
                         </thead>                        
                         <tbody>                            
-                            <%                                
-                                String var = "select_all";
-                                Integer total = 0;
-                                
-                                CallableStatement sp_usu = _connMy.prepareCall("{call sp_ordentaller(?,?,?,?,?,?)}");
-                                sp_usu.setString(1,var);
-                                sp_usu.setString(2,"");
-                                sp_usu.setInt(3,0);
-                                sp_usu.setString(4,"");
-                                sp_usu.setString(5,"");
-                                sp_usu.setString(6,"");
-                                sp_usu.registerOutParameter(1, Types.VARCHAR);                                                          
-                                sp_usu.execute();
-                                
-                                final ResultSet rs = sp_usu.getResultSet();
-                                String cla = "";
-                                while(rs.next())
-                                {
-                                    if(cont % 2 == 0)
-                                        cla = "alt";
-                                    else
-                                        cla = "";
-                                    out.println("<tr id='filaTablaOrdenTaller"+cont+"' class='"+cla+"'>");
-                            %>
-                            <td>
-                                <a href="javascript: onclick=ModificaOrdenTaller(<%=cont%>,'<%= rs.getString("numero_ordentaller")%>','<%= rs.getString("estado")%>')"> >></a>
-                                <input type="hidden" value="0" id="habilitaActCom" name="habilitaActCom" />
-                                <input type="hidden" value="" id="corrOT" />
-                                <input type="hidden" id="selectorOT" />
-                                <input type="hidden" id="estadoOT" />
-                            </td>
-                            <td id="diasR<%=cont%>"><%= rs.getString("dias_restantes")%></td>
-                            <td id="numero_ot<%=cont%>"><%= rs.getString("numero_ordentaller")%></td>
-                            <td id="cliente<%=cont%>"><%= rs.getString("razon_social")%></td> 
-                            <td id="descPieza<%=cont%>"><%= rs.getString("desc_pieza")%></td>
-                            <td id="diametro<%=cont%>"><%= rs.getString("diametro_interno")%></td>
-                            <td id="largo<%=cont%>"><%= rs.getString("largo")%></td>
-                            <td id="fecha_termino<%=cont%>"><%= rs.getString("fecha_prometida")%></td>
-                            <td id="condicion<%=cont%>"><%= rs.getString("condicion")%></td>                                                                                    
-                            <td id="num_cotizacion<%=cont%>"><%= rs.getString("numero_cotizacion")%></td>                              
-                            <td id="fecha_emision<%=cont%>"><%=rs.getString("fecha_emision")%></td>                                                                                    
-                            <td id="estado<%=cont%>"><%= rs.getString("estado")%></td>                            
-                            <td id="cantidad<%=cont%>"><%= rs.getString("cantidad")%></td>
-                            <td id="saldo<%=cont%>"><%= rs.getString("saldo")%></td>
-                            <td id="totalNeto<%=cont%>" class="columnaTotal">$ <%=nf.format(Integer.parseInt(rs.getString("total_pieza")))%></td>
-                            <td style="display: none" id="secuencia<%=cont%>"></td>
-                            <%
-                                    total += Integer.parseInt(rs.getString("total_pieza"));
-                                    //rs.getString("secuencia");
-                                    out.println("</tr>");                                   
-                                    cont ++;                                    
-                                }   
-                            %>     
+                            
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th colspan="14" class="pull-right">Total</th>
-                                <th class="borderLeft thTotal">$ <%=nf.format(total)%></th>
+                                <th class="borderLeft thTotal">$ <%=nf.format(0)%></th>
                             </tr>
                         </tfoot>
                     </table>

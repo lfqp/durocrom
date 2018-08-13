@@ -56,12 +56,15 @@ public class ServletSPOrdenTallerDet extends HttpServlet {
                 _connMy = conexionBD.Conectar((String)s.getAttribute("organizacion")); 
                 CallableStatement sp_usu=null;
                                            
-                sp_usu = _connMy.prepareCall("{call sp_ordentaller_hist(?,?,?,?,?)}");
+                sp_usu = _connMy.prepareCall("{call sp_ordentaller_hist(?,?,?,?,?,?,?,?)}");
                 sp_usu.setString(1, opcion);
                 sp_usu.setString(2, nroOT);
                 sp_usu.setInt(3,Integer.parseInt(cantidad_reb));
                 sp_usu.setString(4, usuario);
                 sp_usu.setInt(5, Integer.parseInt(seq));                
+                sp_usu.setString(6, "");
+                sp_usu.setString(7, "");
+                sp_usu.setString(8, "");
                 sp_usu.registerOutParameter(1, Types.VARCHAR);                
                 
                 sp_usu.execute();

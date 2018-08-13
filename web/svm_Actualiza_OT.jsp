@@ -84,6 +84,8 @@
             String dias_restantes = "";
             String fecha_hoy = "";
             String valorUF = "";
+            String fecha_facturacion = "";
+            String numero_factura = "";
             //corrOT = request.getParameter("secuencia") != null ? request.getParameter("secuencia") : "0";
 
             try {
@@ -114,13 +116,15 @@
                 numeroOT = request.getParameter("numeroOT") != null ? request.getParameter("numeroOT") : "";
                 accion = request.getParameter("accion") != null ? request.getParameter("accion") : "";
                 
-                sp_usu = _connMy.prepareCall("{call sp_ordentaller(?,?,?,?,?,?)}");
+                sp_usu = _connMy.prepareCall("{call sp_ordentaller(?,?,?,?,?,?,?,?)}");
                 sp_usu.setString(1, "select");
                 sp_usu.setString(2, numeroOT);
                 sp_usu.setInt(3, 0);
                 sp_usu.setString(4, "");
                 sp_usu.setString(5, "");
                 sp_usu.setString(6, "");
+                sp_usu.setString(7, "");
+                sp_usu.setString(8, "");
                 sp_usu.registerOutParameter(1, Types.VARCHAR);                                
                 sp_usu.execute();
                 
@@ -157,6 +161,13 @@
                     cantidad = rs.getString("cantidad");
                     dias_restantes = rs.getString("dias_restantes");
                     fecha_hoy = rs.getString("fecha_hoy");
+                    
+                    fecha_facturacion = rs.getString("fecha_facturacion");
+                    
+                    if(fecha_facturacion.equals("null"))
+                       fecha_facturacion = "";
+                    
+                    numero_factura = rs.getString("numero_factura");
                 }
 
             } catch (Exception e) {
@@ -241,8 +252,29 @@
             $( "#dialog_procesos" ).dialog("open");
         }
         
+        function guardarOT(parametroAccion){
+            var accion = parametroAccion || "update";
+            var data = {
+                opcion: accion,
+                //txt_estado: 1,
+                numero_factura: $("#txt_numero_factura").val(),
+                txt_orden_numero: $("#txt_orden_numeroOT").val(),
+                fecha_factura: $("#txt_fecha_facturacion").val()
+            };
+            
+            $.ajax({
+                url : 'ServletSPOrdenTaller', 
+                data: data,
+                type : 'POST',
+                async: false,
+                success : function(response){
+                    console.log(response);
+                }
+            });
+        }
+        
         function historialOT(accion)
-        {            
+        {   
             var numeroOT = "";
             var cantRebaja = "";
             var seq = "";
@@ -439,24 +471,37 @@
                                     <td style="font-size: 14px" colspan ="2"><b>Contacto Comercial</b></td>                                    
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
+                                    <td style="font-size: 14px" colspan="2"><b>Facturación</b></td>
                                     <td style="width: 8%">Nombre Completo:</td>
                                     <td style="padding-bottom: 5px;">
                                         <input type="text" id="txt_orden_NomComercial" value="<%=nom_contacto_com%>" disabled="disabled" name="txt_orden_NomComercial"/>
                                     </td>                                    
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
+                                    <td>Fecha facturación</td>
+                                    <td>
+                                        <input type = "text" value="<%=fecha_facturacion%>" name = "txt_fecha_facturacion" id= "txt_fecha_facturacion" size="12" />
+                                        <img src="images/calendario.png" width="16" height="16" border="0" title="Fecha Inicial" id="lanza" />
+                                        <!-- script que define y configura el calendario--> 
+                                        <script type="text/javascript"> 
+                                            Calendar.setup({ 
+                                            inputField     :    "txt_fecha_facturacion",     // id del campo de texto 
+                                            ifFormat     :     "%d-%m-%Y",     // formato de la fecha que se escriba en el campo de texto 
+                                            button     :    "lanza"     // el id del botÃ³n que lanzarÃ¡ el calendario 
+                                            }); 
+                                        </script>
+                                        <!--Codigo Sistemas SA-->
+                                    </td>
                                     <td>Email:</td>
                                     <td style="padding-bottom: 5px;">
                                         <input type="text" style="width: 200px" value="<%=email_contacto_com%>" id="txt_orden_EmailComercial" disabled="disabled" name="txt_orden_NomComercial"/>
                                     </td>                                    
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
+                                    <td>Número factura</td>
+                                    <td>
+                                        <input type = "text" value="<%=numero_factura%>" name = "txt_numero_factura" id= "txt_numero_factura" size="12" />
+                                    </td>
                                     <td>Fonos:</td>
                                     <td style="padding-bottom: 5px;">
                                         <input type="text" style="width: 200px" value="<%=fono%>" id="txt_orden_FonosComercial" disabled="disabled" name="txt_orden_FonosComercial"/>
@@ -623,7 +668,7 @@
                 </tr>      
             </table>
         </div>            
-                                    <input class ="botonera" type="submit" id="btn_ordentaller_grabar" name="btn_ordentaller_grabar" value="Grabar" onclick="historialOT('save')"/>
+                                    <input class ="botonera" type="submit" id="btn_ordentaller_grabar" name="btn_ordentaller_grabar" value="Grabar" onclick="historialOT('save'); guardarOT();"/>
         <input class = "botonera" type="submit" name="btnCancela" value="Cancelar" onClick="goBack(<%=secuencia%>,'<%=numeroOT.toString()%>')" />
         
 <div id="dialog_procesos" title="Proceso" style="display:none;">
