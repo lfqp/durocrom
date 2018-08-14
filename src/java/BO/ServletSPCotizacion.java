@@ -88,6 +88,15 @@ public class ServletSPCotizacion extends HttpServlet {
             rutCli=rutCli.contains("-")?rutCli.substring(0,rutCli.indexOf("-")):rutCli;
             String estado = request.getParameter("txt_cotizacion_estado").equals("X_X")?"":request.getParameter("txt_cotizacion_estado");
             String detalle_unico_cliente=request.getParameter("detalle_unico_cliente");
+            
+            String numero_ot = request.getParameter("select_nro_ot");
+            
+            if(sequencia.isEmpty())
+                sequencia = "0";
+            
+            if(numero_ot == null || numero_ot.isEmpty())
+                numero_ot = "0";
+            
             try{
                 _connMy = conexionBD.Conectar((String)s.getAttribute("organizacion")); 
                 CallableStatement sp_usu=null;
@@ -104,7 +113,7 @@ public class ServletSPCotizacion extends HttpServlet {
                 }
                 
                 Date sqlDate = new Date(formato.parse(fechaEmision).getTime());                
-                sp_usu = _connMy.prepareCall("{call sp_cotizacion(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                sp_usu = _connMy.prepareCall("{call sp_cotizacion(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
                 sp_usu.setString(1,opcion);
                 sp_usu.setInt(2,Integer.parseInt(numeroCotiza));
                 sp_usu.setDate(3,sqlDate);
@@ -133,6 +142,7 @@ public class ServletSPCotizacion extends HttpServlet {
                 sp_usu.setString(26,desde);
                 sp_usu.setString(27,hasta);
                 sp_usu.setString("in_detalle_unico_cliente", detalle_unico_cliente);
+                sp_usu.setInt("in_numero_ot", Integer.parseInt(numero_ot));
                 sp_usu.registerOutParameter(1, Types.VARCHAR);
                 
                 sp_usu.execute();

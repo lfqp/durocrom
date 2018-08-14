@@ -305,6 +305,9 @@ function filtraCotizacion(){
     var desde =$("#txt_filtroComercial_ingreso").val();
     var hasta =$("#txt_filtroComercial_final").val();
     
+    var selectNroCotizacion = $("#slt_filtroComercial_nrocotizacion").val();
+    var selectNroOT = $("#slt_filtroComercial_nrOT").val();
+    
     var diaDesde=desde.substring(0, 2);
     var mesDesde=desde.substring(3, 5);
     var yearDesde=desde.substring(6, 10);
@@ -322,17 +325,33 @@ function filtraCotizacion(){
     var accion=getUrlParameter('accion');
     
     var estado=$("#slt_filtroComercial_estado").val()== "" ? "X_X" : $("#slt_filtroComercial_estado").val();
-    
+    var datos = {
+        opcion: "select_all",
+        txt_cotizacion_numero: selectNroCotizacion,
+        txt_cotizacion_fecha: "2016-04-04",
+        txt_cotizacion_emitida_por: emitidaPor,
+        txt_cotizacion_dias_habiles: 0,
+        select_cotizacion_presupuesto_valido:0,
+        select_cotizacion_plazo_entrega:0,
+        select_cotizacion_condicion_pago:0,
+        txt_cotizacion_rutcli:0,
+        txt_cotizacion_moneda:0,
+        txt_cotizacion_total:0,
+        select_cotizacion_total_procesos:0,
+        select_cotizacion_total_materiales:0,
+        txt_cotizacion_total_neto:0,
+        txt_cotizacion_iva:0,
+        txt_cotizacion_total_bruto:0,
+        txt_cotizacion_cli:0,
+        sequencia: sequence,
+        fecha_desde: filtroDesde,
+        fecha_hasta: filtroHasta,
+        txt_cotizacion_estado: estado,
+        select_nro_ot: selectNroOT
+    };
     $.ajax({
         url : 'ServletSPCotizacion', 
-        data: "opcion=select_all"+"&txt_cotizacion_numero=0"+"&txt_cotizacion_fecha=2016-04-04"
-                +"&txt_cotizacion_emitida_por="+emitidaPor+"&txt_cotizacion_dias_habiles=0"
-                +"&select_cotizacion_presupuesto_valido=0"+"&select_cotizacion_plazo_entrega=0"
-                +"&select_cotizacion_condicion_pago=0"+"&txt_cotizacion_rutcli=0"+"&txt_cotizacion_moneda=0"
-                +"&txt_cotizacion_total=0"+"&select_cotizacion_total_procesos=0"+"&select_cotizacion_total_materiales=0"
-                +"&txt_cotizacion_total_neto=0"+"&txt_cotizacion_iva=0"+"&txt_cotizacion_total_bruto=0"
-                +"&txt_cotizacion_cli=0"+"&sequencia="+sequence+"&fecha_desde="+filtroDesde+"&fecha_hasta="+filtroHasta
-                +"&txt_cotizacion_estado="+estado,
+        data: $.param(datos),
         type : 'POST',
         dataType : "html",
         async:false,

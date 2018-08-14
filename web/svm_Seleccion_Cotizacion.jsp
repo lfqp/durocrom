@@ -297,10 +297,10 @@ function getUrlParameter(sParam) {
                                     %>
                                 </select>
                             </td>
-                                <td> &nbsp;N°&nbsp;Cotización</td>                               
+                                <td> &nbsp;N&ordm;&nbsp;Cotizaci&oacute;n</td>                               
                                 <td> 
                                     <select id="slt_filtroComercial_nrocotizacion" name="slt_filtroComercial_nrocotizacion">
-                                     <option value="">--Seleccione--</option>
+                                     <option value="0">--Seleccione--</option>
                                        <%                                   
                                         stmt = _connMy.createStatement();
                                         q="select numero_cotizacion from svm_cotizaciones_head ";
@@ -313,10 +313,10 @@ function getUrlParameter(sParam) {
                                     </select>
                                 </td>
                                 
-                                <td> &nbsp;N°&nbsp;OT</td>
+                                <td> &nbsp;N&ordm;&nbsp;OT</td>
                                 <td>
                                     <select id="slt_filtroComercial_nrOT" name="slt_filtroComercial_nrOT">
-                                     <option value="">--Seleccione--</option>
+                                     <option value="0">--Seleccione--</option>
                                       <%                                   
                                         stmt = _connMy.createStatement();
                                         q="SELECT (SUBSTRING_INDEX (numero_ordentaller , '|' , '1')) as consulta FROM svm_ordenestaller ";

@@ -1,3 +1,5 @@
+<%@page import="java.text.ParseException"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.Types"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.Statement"%>
@@ -162,17 +164,22 @@
                     dias_restantes = rs.getString("dias_restantes");
                     fecha_hoy = rs.getString("fecha_hoy");
                     
-                    fecha_facturacion = rs.getString("fecha_facturacion");
-                    
-                    if(fecha_facturacion.equals("null"))
-                       fecha_facturacion = "";
-                    
                     numero_factura = rs.getString("numero_factura");
+                    fecha_facturacion = rs.getString("fecha_facturacion");
                 }
-
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
-            }            
+            }
+            
+            SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+            formato.setLenient(false);
+            try {
+                formato.parse(fecha_facturacion);
+            } catch (ParseException ex) {
+                fecha_facturacion = "";
+            } catch (Exception e) {
+                fecha_facturacion = "";
+            }
         %>
         <script type="text/javascript">                
         
