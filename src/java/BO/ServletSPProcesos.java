@@ -97,6 +97,34 @@ public class ServletSPProcesos extends HttpServlet {
                 salida += "<td colspan=\"2\"><b>Total Procesos</b></td>";
                 salida += "<td><input style=\"width:120px; text-align: right\" type=\"text\" value=\"0\" readonly id=\"txt_cotizacion_totalProcesos\" name=\"txt_cotizacion_totalProcesos\" /></td>";
                 salida += "</tr>";
+                
+                 //INICIO: se agregan campos (%margen, utilidad, total) 02-01-2019
+                salida += "<tr>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td colspan=\"2\"><b>% Margen</b></td>";
+                salida += "<td><input style=\"width:120px; text-align: right\" type=\"text\" value=\"0\"  name=\"txt_cotizacion_margenvo\" /></td>";                
+                salida += "</tr>";
+                salida += "<tr>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td colspan=\"2\"><b>Utilidad</b></td>";
+                salida += "<td><input style=\"width:120px; text-align: right\" type=\"text\" value=\"0\" readonly id=\"txt_cotizacion_utilidad\" name=\"txt_cotizacion_utilidad\" /></td>";                
+                salida += "</tr>";
+                salida += "<tr>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td colspan=\"2\"><b>Total</b></td>";
+                salida += "<td><input style=\"width:120px; text-align: right\" type=\"text\" value=\"0\" readonly id=\"txt_cotizacion_totalnvo\" name=\"txt_cotizacion_totalnvo\" /></td>";                
+                salida += "</tr>";
+                //FIN : : se agregan campos (%margen, utilidad, total) 02-01-2019      
+                
                 salida += "<tr>&nbsp;</tr>";
                 salida += "</tbody>";
                 salida += "</table>";
@@ -155,7 +183,37 @@ public class ServletSPProcesos extends HttpServlet {
                 salida += "<td></td>";
                 salida += "<td colspan=\"2\"><b>Total Materiales</b></td>";
                 salida += "<td><input style=\"width:120px; text-align: right\" type=\"text\" value=\"0\" readonly id=\"txt_cotizacion_totalMateriales\" name=\"txt_cotizacion_totalMateriales\" /></td>";
-                salida += "</tr>";      
+                salida += "</tr>";   
+                
+                //INICIO: se agregan campos (%margen, utilidad, total) 02-01-2019
+                salida += "<tr>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td colspan=\"2\"><b>% Margen</b></td>";
+                salida += "<td><input style=\"width:120px; text-align: right\" type=\"text\" value=\"0\" id=\"txt_cotizacion_margen2\" name=\"txt_cotizacion_margen2\" /></td>";
+                salida += "</tr>";   
+                salida += "<tr>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td colspan=\"2\"><b>Utilidad</b></td>";
+                salida += "<td><input style=\"width:120px; text-align: right\" type=\"text\" value=\"0\" readonly id=\"txt_cotizacion_utilidad2\" name=\"txt_cotizacion_utilidad2\" /></td>";
+                salida += "</tr>";  
+                salida += "<tr>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td></td>";
+                salida += "<td colspan=\"2\"><b>Total</b></td>";
+                salida += "<td><input style=\"width:120px; text-align: right\" type=\"text\" value=\"0\" readonly id=\"txt_cotizacion_total2\" name=\"txt_cotizacion_total2\" /></td>";
+                salida += "</tr>";  
+                //FIN: se agregan campos (%margen, utilidad, total) 02-01-2019
+                
+                
+                
                 salida += "<tr>";
                 salida += "<td></td>";
                 salida += "<td></td>";

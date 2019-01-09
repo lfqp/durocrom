@@ -82,6 +82,7 @@
         response.sendRedirect("login.jsp");
     }
 %>
+
 <script type="text/javascript">
     function validaSubmit(){
         if(document.getElementById("slt_Informe").value != ""){

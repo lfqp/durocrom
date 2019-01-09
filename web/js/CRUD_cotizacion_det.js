@@ -8,6 +8,9 @@ function ingresaDetalle(){
     var totalCrom=$("#txt_cotizacion_totalCrom").val();
     var valUnitario=$("#txt_cotizacion_valUnitario").val();
     var totales=$("#txt_cotizacion_totalProcesos").val();
+    var margen=$("#txt_cotizacion_margenvo").val();
+    
+    
     var c_horas=$("#txt_cotizacion_cHora").val();
     var cantHoras=$("#txt_cotizacion_cantHrs").val();
     var totalHoras=$("#txt_cotizacion_totalhoras").val();   
@@ -63,6 +66,7 @@ function ingresaDetalle(){
     var cantProc = [];
     var precioProc = [];
     var totalProc = [];
+    
     
     $('input[name="chk_group[]"]:checked').each(function() {
         cantidadProc = cantidadProc + 1;
@@ -129,6 +133,7 @@ function ingresaDetalle(){
             txt_cotizacion_materiales_totalitem5:matTotalitem5,
             txt_cotizacion_totalMateriales:totalMateriales,
             txt_cotizacion_totalGeneral:totalGeneralCot,
+            txt_cotizacion_margenvo:margen,
             iva:iva,
             totalbruto:totalBruto,
             txt_cotizacion_numero:numeroCotizacion,
@@ -136,6 +141,7 @@ function ingresaDetalle(){
             arrayCantProc:JSON.stringify(cantProc),
             arrayPrecioProc:JSON.stringify(precioProc),
             arrayTotalProc:JSON.stringify(totalProc),
+            
             sequencia:sequence,
             correlativo:null
         },
@@ -398,6 +404,7 @@ function cargaDetallePaso(){
                 "&arrayCodProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayCantProc=0,0,0,0,0,0,0,0,0,0,0,0"+
                 "&arrayPrecioProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayTotalProc=0,0,0,0,0,0,0,0,0,0,0,0"+
                 "&txt_cotizacion_comentarios="+"&txt_cotizacion_numero="+numeroCotizacion+
+                "&txt_cotizacion_margenvo=0"+
                 "&sequencia="+sequence+"&correlativo=&accion="+accion,
         type : 'POST',
         dataType : "html",
@@ -553,6 +560,9 @@ function modificaDetalle(){
     var totalCrom=$("#txt_cotizacion_totalCrom").val();
     var valUnitario=$("#txt_cotizacion_valUnitario").val();
     var totales=$("#txt_cotizacion_totalProcesos").val();    
+    var margen=$("#txt_cotizacion_margenvo").val();
+    
+    
     var numeroCotizacion=$("#txt_cotizacion_numero").val();
     var c_horas=$("#txt_cotizacion_cHora").val();
     var cantHoras=$("#txt_cotizacion_cantHrs").val();   
@@ -733,6 +743,7 @@ function modificaDetalle(){
             arrayCantProc:JSON.stringify(cantProc),
             arrayPrecioProc:JSON.stringify(precioProc),
             arrayTotalProc:JSON.stringify(totalProc),
+            txt_cotizacion_margenvo:margen,
             sequencia:sequence,
             correlativo:correlativo
         },
@@ -822,6 +833,7 @@ function eliminaDetalle(){
                 "&arrayCodProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayCantProc=0,0,0,0,0,0,0,0,0,0,0,0"+
                 "&arrayPrecioProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayTotalProc=0,0,0,0,0,0,0,0,0,0,0,0"+
                 "&txt_cotizacion_comentarios="+"&txt_cotizacion_numero="+numeroCotizacion+
+                "&txt_cotizacion_margenvo=0"+
                 "&sequencia="+sequence+"&correlativo="+correlativo,
         type : 'POST',
         dataType : "html",
@@ -1191,7 +1203,7 @@ function eliminaSubDetalle(){
         url : 'ServletSPCotizacionSubDet', 
         data: "opcion=delete"+"&txt_cotizacion_valor=0"+"&txt_cotizacion_margen=0"+
                 "&txt_cotizacion_totalmaterial=0"+"&txt_cotizacion_numero="+numeroCotizacion+
-                "&subitem="+subitem+"&sequencia="+sequence+"&correlativo="+correlativo,
+                "&subitem="+subitem+"&sequencia="+sequence+"&correlativo="+correlativo, 
         type : 'POST',
         dataType : "html",
         async:false,
@@ -1339,6 +1351,8 @@ function cargaProcesos() {
             $("#txt_cotizacion_materiales_totalitem5").val("0");
             
             $("#txt_cotizacion_totalProcesos").val("0");
+            $("#txt_cotizacion_margenvo").val("0");
+            
             $("#txt_cotizacion_totalMateriales").val("0");
             $("#txt_cotizacion_totalGeneral").val("0");
 
@@ -1379,6 +1393,7 @@ function limpiaProcesos() {
                 "&txt_cotizacion_totalGeneral=0"+"&iva=0"+"&totalbruto=0"+              
                 "&arrayCodProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayCantProc=0,0,0,0,0,0,0,0,0,0,0,0"+
                 "&arrayPrecioProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayTotalProc=0,0,0,0,0,0,0,0,0,0,0,0"+
+                 "&txt_cotizacion_margenvo=0"+
                 "&txt_cotizacion_comentarios="+"&txt_cotizacion_numero="+numeroCotizacion+
                 "&sequencia="+sequence+"&correlativo="+correlativo,
         type : 'POST',
@@ -1679,7 +1694,7 @@ function cargaDatosProcesos(superModificado, cantidadModificado) {
                 "&txt_cotizacion_materiales_totalitem5=0"+"&txt_cotizacion_totalMateriales=0"+
                 "&txt_cotizacion_totalGeneral=0"+"&iva=0"+"&totalbruto=0"+              
                 "&arrayCodProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayCantProc=0,0,0,0,0,0,0,0,0,0,0,0"+
-                "&arrayPrecioProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayTotalProc=0,0,0,0,0,0,0,0,0,0,0,0"+
+                "&arrayPrecioProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayTotalProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&txt_cotizacion_margenvo=0"+
                 "&txt_cotizacion_comentarios="+"&txt_cotizacion_numero="+numeroCotizacion+
                 "&sequencia="+sequence+"&correlativo="+correlativo,
         type : 'POST',
@@ -1811,6 +1826,8 @@ function cargaDatosProcesos(superModificado, cantidadModificado) {
             $("#txt_cotizacion_totalProcesos").val(arrResult[68]);
             $("#txt_cotizacion_totalMateriales").val(arrResult[69]);
             $("#txt_cotizacion_totalGeneral").val(arrResult[70]);
+            $("#txt_cotizacion_margenvo").val(arrResult[71]);
+            
             
             if (superModificado == "Modificado" && cantidadModificado == "") {
                 $("#txt_cotizacion_cant1").val(area);

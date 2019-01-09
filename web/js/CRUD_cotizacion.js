@@ -133,7 +133,10 @@ function grabarCotizacion(){
           sequencia: sequence,
           detalle_unico_cliente: detalle_unico_cliente,
           fecha_desde: '',
-          fecha_hasta: ''
+          fecha_hasta: '',
+          select_nro_ot: numero_ot 
+          
+          
         },
 //        data: "opcion="+accion+"&txt_cotizacion_numero="+numeroCotizacion+"&txt_cotizacion_fecha="+fechaEmision
 //                +"&txt_cotizacion_dias_habiles="+diasHabiles+"&txt_cotizacion_ruteje="+vendedor
@@ -307,6 +310,7 @@ function filtraCotizacion(){
     
     var selectNroCotizacion = $("#slt_filtroComercial_nrocotizacion").val();
     var selectNroOT = $("#slt_filtroComercial_nrOT").val();
+    
     
     var diaDesde=desde.substring(0, 2);
     var mesDesde=desde.substring(3, 5);
@@ -572,7 +576,7 @@ function GeneraOrdenTaller(numero)
             async:false,
             success : function(data) {
                 
-//                alert(data);    
+            //    alert(data);    
                 
                 if ((data.toString() == "") || (data.toString() == null)){
                     FuncionErrores(255);                    

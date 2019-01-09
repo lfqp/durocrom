@@ -81,6 +81,7 @@ public class ServletSPCotizacionDet extends HttpServlet {
             String cantProc=request.getParameter("arrayCantProc");
             String precioProc=request.getParameter("arrayPrecioProc");
             String totalProc=request.getParameter("arrayTotalProc");
+            String margen=request.getParameter("arrayMargen");
             
 //            String arrayCodProc [] = codProc.replace("\"", "").replace("[", "").replace("]", "").split(",");
 //            String arrayCantProc [] = cantProc.replace("\"", "").replace("[", "").replace("]", "").split(",");
@@ -185,7 +186,7 @@ public class ServletSPCotizacionDet extends HttpServlet {
                 _connMy = conexionBD.Conectar((String)s.getAttribute("organizacion")); 
                 CallableStatement sp_usu=null;
                            
-                sp_usu = _connMy.prepareCall("{call sp_cotizaciones_det(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                sp_usu = _connMy.prepareCall("{call sp_cotizaciones_det(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
                 sp_usu.setString(1,opcion);
                 sp_usu.setInt(2,Integer.parseInt(numeroCotiza));
                 sp_usu.setInt(3,Integer.parseInt(correlativo));
@@ -291,6 +292,7 @@ public class ServletSPCotizacionDet extends HttpServlet {
                 sp_usu.setString(54,cantProc);
                 sp_usu.setString(55,precioProc);
                 sp_usu.setString(56,totalProc);
+                sp_usu.setString(57,margen);
                 
                 sp_usu.registerOutParameter(1, Types.VARCHAR);
                 
@@ -338,9 +340,11 @@ public class ServletSPCotizacionDet extends HttpServlet {
                         salida += "<td style=\"display:none;\" id =\"cotazacionCorriente"+cont+"\">"+rs.getString("corriente")+"</td>"; 
                         salida += "<td style=\"display:none;\" id =\"cotazacionCodPieza"+cont+"\">"+rs.getString("cod_pieza")+"</td>"; 
                         salida += "<td style=\"display:none;\" id =\"cotazacionTotalProcesos"+cont+"\">"+rs.getString("totales")+"</td>"; 
+                       
                         salida += "<td style=\"display:none;\" id =\"cotazacionTotalMateriales"+cont+"\">"+rs.getString("total_materiales")+"</td>"; 
                         salida += "<td style=\"display:none;\" id =\"cotazacionDet_nuevousado"+cont+"\">"+rs.getString("nuevo_usado")+"</td>";
                         salida += "<td style=\"display:none;\" id =\"cotazacionDetmaterialbase"+cont+"\">"+rs.getString("material_base")+"</td>";
+                        
                         salida += "</tr>";
                         salida += "<input type=\"hidden\" id=\"cantidad_detalle\" value="+(cont+1)+"></input>";
                         cont++;
@@ -425,6 +429,7 @@ public class ServletSPCotizacionDet extends HttpServlet {
                             materiales += rs.getString("total_pieza")+"|";
                             materiales += rs.getString("iva")+"|";
                             materiales += rs.getString("total_bruto")+"|";
+                            materiales += rs.getString("json_margen")+"|";
                             
                             salida += "{\"procesos\":{\"codproc\":" + rs.getString("json_codproc") + "," + 
                                 "\"cantproc\":"+ rs.getString("json_cantproc")+"," + 

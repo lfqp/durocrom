@@ -116,6 +116,11 @@
         {
             text-align: right;                        
         }
+        
+        input[readonly]:not([type="button"]){
+            background-color: #f0f0f0;
+            border: solid 1px #cccccc;
+        }
 </style>
     
 <script type="text/javascript">        
@@ -869,7 +874,7 @@ function loadDialogMaeClientes(){
                                          
                                          var = "select";    
                                          System.out.println(corrCotiza);
-                                         sp_usu = _connMy.prepareCall("{call sp_cotizaciones_det(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                                         sp_usu = _connMy.prepareCall("{call sp_cotizaciones_det(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
                                         sp_usu.setString(1,var);
                                         sp_usu.setInt(2,0);
                                         sp_usu.setInt(3,0);
@@ -927,6 +932,7 @@ function loadDialogMaeClientes(){
                                         sp_usu.setString(54,"");
                                         sp_usu.setString(55,"");
                                         sp_usu.setString(56,"");
+                                        sp_usu.setString(57,"");
                                         
                                         sp_usu.registerOutParameter(1, Types.VARCHAR);
                                         sp_usu.execute();
@@ -964,6 +970,7 @@ function loadDialogMaeClientes(){
                                         <td style="display:none;" id ="cotazacionCorriente<%=cont%>"><%=rsDetalle.getString("corriente")%></td>
                                         <td style="display:none;" id ="cotazacionCodPieza<%=cont%>"><%=rsDetalle.getString("cod_pieza")%></td>
                                         <td style="display:none;" id ="cotazacionTotalProcesos<%=cont%>"><%=rsDetalle.getString("totales")%></td>
+                                        
                                         <td style="display:none;" id ="cotazacionTotalMateriales<%=cont%>"><%=rsDetalle.getString("total_materiales")%></td>
                                         <td style="display:none;" id ="cotazacionDet_nuevousado<%=cont%>"><%=rsDetalle.getString("nuevo_usado")%></td>
                                         <td style="display:none;" id ="cotazacionDetmaterialbase<%=cont%>"><%=rsDetalle.getString("material_base")%></td>
@@ -971,6 +978,7 @@ function loadDialogMaeClientes(){
                                         <!--<td style="display:none;" id ="cotazacionDetCodPieza<%=cont%>"><%=rsDetalle.getString("cod_pieza")%></td>
                                         <td style="display:none;" id ="cotazacionDetTotalProcesos<%=cont%>"><%=rsDetalle.getString("totales")%></td>
                                         <td style="display:none;" id ="cotazacionDetTotalMateriales<%=cont%>"><%=rsDetalle.getString("total_materiales")%></td>-->
+                                        <td style="display:none;" id ="cotazacionMargen<%=cont%>"><%=rsDetalle.getString("json_margen")%></td>
                                      <%
                                             out.print("</tr>");
                                             claseGrilla = "";
