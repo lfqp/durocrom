@@ -1508,6 +1508,73 @@ function recorreProcesos() {
     
 }
 
+function calculaCampoUtilidad(tipo){
+    var tipoCalculo = tipo || "procesos";
+    var total = 0;
+    var totalItem = 0;
+    var elemento = null;
+    
+    if(tipoCalculo == "procesos"){
+        totalItem = $("#txt_cotizacion_totalProcesos").val();
+        total = $("#txt_cotizacion_totalnvo").val();
+        elemento = $("#txt_cotizacion_utilidad");
+    }else if(tipoCalculo == "materiales"){
+        totalItem = $("#txt_cotizacion_totalMateriales").val();
+        total = $("#txt_cotizacion_total_nvo_2").val();
+        elemento = $("#txt_cotizacion_utilidad2");
+    }
+    
+    totalItem = totalItem.replace(/\./g, '');
+    totalItem = totalItem.replace(/\,/g, '');
+    
+    total = total.replace(/\./g, '');
+    total = total.replace(/\,/g, '');
+    
+    totalItem = parseInt(totalItem);
+    total = parseFloat(total);
+    
+    var utilidad = total - totalItem;
+    elemento.val(separadorDeMiles(utilidad.toString()));
+    
+    var totalProcesos = $("#txt_cotizacion_totalnvo").val().replace(/\./g ,"");
+    var totalMateriales = $("#txt_cotizacion_total_nvo_2").val().replace(/\./g ,"");
+    
+    var totalGeneralPieza = parseInt(totalProcesos) + parseInt(totalMateriales);
+    
+    $("#txt_cotizacion_totalGeneral").val(separadorDeMiles(totalGeneralPieza.toString()));
+}
+
+function calculaCampoTotal(tipo){
+    var tipoCalculo = tipo || "procesos";
+    var totalItem = 0;
+    var margen = 0;
+    var elemento = null;
+    
+    if(tipoCalculo == "procesos"){
+        totalItem = $("#txt_cotizacion_totalProcesos").val();
+        margen = $("input[name='txt_cotizacion_margenvo']").val();
+        elemento = $("#txt_cotizacion_totalnvo");
+    }else if(tipoCalculo == "materiales"){
+        totalItem = $("#txt_cotizacion_totalMateriales").val();
+        margen = $("#txt_cotizacion_margen2").val();
+        elemento = $("#txt_cotizacion_total_nvo_2");
+    }
+    
+    totalItem = totalItem.replace(/\./g, '');
+    
+    margen = margen.replace(/\./g, '');
+    margen = margen.replace(/\,/g, '.');
+    
+    totalItem = parseInt(totalItem);
+    margen = parseFloat(margen);
+    
+    var total = totalItem / ((100 - margen) / 100);
+    total = Math.round(total);
+    elemento.val(separadorDeMiles(total.toString()));
+    
+    calculaCampoUtilidad(tipoCalculo);
+}
+
 function calculaTotalProcesos(id) {
     var cantidad = $("#txt_cotizacion_cant"+id).val().replace(/,/g ,".");
     var precio = $("#txt_cotizacion_preciounitario"+id).val().replace(/\./g ,"");
@@ -1535,7 +1602,9 @@ function calculaTotalProcesos(id) {
     $("#txt_cotizacion_totalProcesos").val(separadorDeMiles(totalProcesos.toString()));
     totalMateriales = parseInt($("#txt_cotizacion_totalMateriales").val().replace(/\./g ,""));
     totalGeneral = totalProcesos + totalMateriales;
-    $("#txt_cotizacion_totalGeneral").val(separadorDeMiles(totalGeneral.toString()));
+    //$("#txt_cotizacion_totalGeneral").val(separadorDeMiles(totalGeneral.toString()));
+    
+    calculaCampoTotal();
 }
 
 function calculaTotalCoti() {
@@ -1592,7 +1661,9 @@ function calculaTotalMateriales(id) {
     
     
     $("#txt_cotizacion_totalMateriales").val(separadorDeMiles(totalMateriales.toFixed(0)));
-    $("#txt_cotizacion_totalGeneral").val(separadorDeMiles(totalPieza.toFixed(0)));
+    //$("#txt_cotizacion_totalGeneral").val(separadorDeMiles(totalPieza.toFixed(0)));
+    
+    calculaCampoTotal("materiales");
 }
 
 function SalirCliente() {

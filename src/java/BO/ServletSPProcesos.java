@@ -105,7 +105,7 @@ public class ServletSPProcesos extends HttpServlet {
                 salida += "<td></td>";
                 salida += "<td></td>";
                 salida += "<td colspan=\"2\"><b>% Margen</b></td>";
-                salida += "<td><input style=\"width:120px; text-align: right\" type=\"text\" value=\"0\"  name=\"txt_cotizacion_margenvo\" /></td>";                
+                salida += "<td><input style=\"width:120px; text-align: right\" type=\"text\" value=\"0\"  name=\"txt_cotizacion_margenvo\" onchange=\"calculaCampoTotal()\" /></td>";
                 salida += "</tr>";
                 salida += "<tr>";
                 salida += "<td></td>";
@@ -128,7 +128,7 @@ public class ServletSPProcesos extends HttpServlet {
                 salida += "<tr>&nbsp;</tr>";
                 salida += "</tbody>";
                 salida += "</table>";
-                salida += "<table id==\"materiales\">";
+                salida += "<table id=\"materiales\">";
                 salida += "<tbody>";
                 salida += "<tr>";
                 salida += "</tr>";
@@ -192,7 +192,7 @@ public class ServletSPProcesos extends HttpServlet {
                 salida += "<td></td>";
                 salida += "<td></td>";
                 salida += "<td colspan=\"2\"><b>% Margen</b></td>";
-                salida += "<td><input style=\"width:120px; text-align: right\" type=\"text\" value=\"0\" id=\"txt_cotizacion_margen2\" name=\"txt_cotizacion_margen2\" /></td>";
+                salida += "<td><input style=\"width:120px; text-align: right\" type=\"text\" value=\"0\" id=\"txt_cotizacion_margen2\" name=\"txt_cotizacion_margen2\" onchange=\"calculaCampoTotal('materiales')\" /></td>";
                 salida += "</tr>";   
                 salida += "<tr>";
                 salida += "<td></td>";
@@ -208,7 +208,7 @@ public class ServletSPProcesos extends HttpServlet {
                 salida += "<td></td>";
                 salida += "<td></td>";
                 salida += "<td colspan=\"2\"><b>Total</b></td>";
-                salida += "<td><input style=\"width:120px; text-align: right\" type=\"text\" value=\"0\" readonly id=\"txt_cotizacion_total2\" name=\"txt_cotizacion_total2\" /></td>";
+                salida += "<td><input style=\"width:120px; text-align: right\" type=\"text\" value=\"0\" readonly id=\"txt_cotizacion_total_nvo_2\" name=\"txt_cotizacion_total_nvo_2\" /></td>";
                 salida += "</tr>";  
                 //FIN: se agregan campos (%margen, utilidad, total) 02-01-2019
                 
