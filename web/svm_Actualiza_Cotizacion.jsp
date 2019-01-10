@@ -985,9 +985,13 @@ function loadDialogMaeClientes(){
                                         <!--<td style="display:none;" id ="cotazacionDetCodPieza<%=cont%>"><%=rsDetalle.getString("cod_pieza")%></td>
                                         <td style="display:none;" id ="cotazacionDetTotalProcesos<%=cont%>"><%=rsDetalle.getString("totales")%></td>
                                         <td style="display:none;" id ="cotazacionDetTotalMateriales<%=cont%>"><%=rsDetalle.getString("total_materiales")%></td>-->
-                                        <td style="display:none;" id ="cotazacionMargen<%=cont%>"><%=rsDetalle.getString("json_margen")%></td>
-                                        <td style="display:none;" id ="cotazacionUtilidad<%=cont%>"><%=rsDetalle.getString("json_utilidad")%></td>
-                                        <td style="display:none;" id ="cotazacionTotalNvo<%=cont%>"><%=rsDetalle.getString("json_totalnvo")%></td>
+                                        <td style="display:none;" id ="cotazacionMargen<%=cont%>"><%=rsDetalle.getString("margen_procesos")%></td>
+                                        <td style="display:none;" id ="cotazacionUtilidad<%=cont%>"><%=rsDetalle.getString("utilidad_procesos")%></td>
+                                        <td style="display:none;" id ="cotazacionTotal<%=cont%>"><%=rsDetalle.getString("total_procesos")%></td>
+                                        <td style="display:none;" id ="cotazacionTotalNvo<%=cont%>"><%=rsDetalle.getString("total_total_procesos")%></td>
+                                        <td style="display:none;" id ="cotazacionMargenMaterial<%=cont%>"><%=rsDetalle.getString("margen_materiales")%></td>
+                                        <td style="display:none;" id ="cotazacionUtilidadMaterial<%=cont%>"><%=rsDetalle.getString("utilidad_materiales")%></td>
+                                        <td style="display:none;" id ="cotazacionTotalNvoMaterial<%=cont%>"><%=rsDetalle.getString("total_total_materiales")%></td>
                                      <%
                                             out.print("</tr>");
                                             claseGrilla = "";
