@@ -8,8 +8,14 @@ function ingresaDetalle(){
     var totalCrom=$("#txt_cotizacion_totalCrom").val();
     var valUnitario=$("#txt_cotizacion_valUnitario").val();
     var totales=$("#txt_cotizacion_totalProcesos").val();
-    var margen=$("#txt_cotizacion_margenvo").val();
     
+    var margen = $("input[name='txt_cotizacion_margenvo']").val();
+    var utilidad = $("#txt_cotizacion_utilidad").val();
+    var totalProcesos = $("#txt_cotizacion_totalProcesos").val();
+    var totalNvo = $("#txt_cotizacion_totalnvo").val();
+    var margenMateriales = $("#txt_cotizacion_margen2").val();
+    var utilidadMateriales = $("#txt_cotizacion_utilidad2").val();
+    var totalNvoMateriales = $("#txt_cotizacion_total_nvo_2").val();
     
     var c_horas=$("#txt_cotizacion_cHora").val();
     var cantHoras=$("#txt_cotizacion_cantHrs").val();
@@ -133,7 +139,6 @@ function ingresaDetalle(){
             txt_cotizacion_materiales_totalitem5:matTotalitem5,
             txt_cotizacion_totalMateriales:totalMateriales,
             txt_cotizacion_totalGeneral:totalGeneralCot,
-            txt_cotizacion_margenvo:margen,
             iva:iva,
             totalbruto:totalBruto,
             txt_cotizacion_numero:numeroCotizacion,
@@ -141,7 +146,13 @@ function ingresaDetalle(){
             arrayCantProc:JSON.stringify(cantProc),
             arrayPrecioProc:JSON.stringify(precioProc),
             arrayTotalProc:JSON.stringify(totalProc),
-            
+            txt_cotizacion_margenvo:margen,
+            txt_cotizacion_utilidad:utilidad,
+            txt_cotizacion_totalnvo:totalNvo,
+            txt_cotizacion_total_proceso:totalProcesos,
+            txt_cotizacion_margen_materiales: margenMateriales,
+            txt_cotizacion_utilidad_materiales: utilidadMateriales,
+            txt_cotizacion_total_materiales: totalMateriales,
             sequencia:sequence,
             correlativo:null
         },
@@ -213,6 +224,13 @@ function asociaDetalle(){
                 "&arrayCodProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayCantProc=0,0,0,0,0,0,0,0,0,0,0,0"+
                 "&arrayPrecioProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayTotalProc=0,0,0,0,0,0,0,0,0,0,0,0"+
                 "&txt_cotizacion_comentarios="+comentarios+"&txt_cotizacion_numero="+numeroCotizacion+
+                "&txt_cotizacion_margenvo=0"+
+                "&txt_cotizacion_utilidad=0"+
+                "&txt_cotizacion_total_proceso=0"+
+                "&txt_cotizacion_totalnvo=0"+
+                "&txt_cotizacion_margen_materiales=0"+
+                "&txt_cotizacion_utilidad_materiales=0"+
+                "&txt_cotizacion_total_materiales=0"+
                 "&sequencia="+sequence+"&correlativo=",
         type : 'POST',
         dataType : "html",
@@ -288,6 +306,13 @@ function guardaDetalle(){
                 "&arrayCodProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayCantProc=0,0,0,0,0,0,0,0,0,0,0,0"+
                 "&arrayPrecioProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayTotalProc=0,0,0,0,0,0,0,0,0,0,0,0"+
                 "&txt_cotizacion_comentarios="+comentarios+"&txt_cotizacion_numero="+numeroCotizacion+
+                "&txt_cotizacion_margenvo=0"+
+                "&txt_cotizacion_utilidad=0"+
+                "&txt_cotizacion_totalnvo=0"+
+                "&txt_cotizacion_total_proceso=0"+
+                "&txt_cotizacion_margen_materiales=0"+
+                "&txt_cotizacion_utilidad_materiales=0"+
+                "&txt_cotizacion_total_materiales=0"+
                 "&sequencia="+sequence+"&correlativo=",
         type : 'POST',
         dataType : "html",
@@ -341,6 +366,13 @@ function cargaDetalle(){
                 "&txt_cotizacion_materiales_totalitem5=0"+"&txt_cotizacion_totalMateriales=0"+
                 "&txt_cotizacion_totalGeneral=0"+"&iva=0"+"&totalbruto=0"+
                 "&txt_cotizacion_comentarios="+"&txt_cotizacion_numero="+numeroCotizacion+
+                "&txt_cotizacion_margenvo=0"+
+                "&txt_cotizacion_utilidad=0"+
+                "&txt_cotizacion_totalnvo=0"+
+                "&txt_cotizacion_total_proceso=0"+
+                "&txt_cotizacion_margen_materiales=0"+
+                "&txt_cotizacion_utilidad_materiales=0"+
+                "&txt_cotizacion_total_materiales=0"+
                 "&sequencia="+sequence+"&correlativo=",
         type : 'POST',
         dataType : "html",
@@ -405,6 +437,12 @@ function cargaDetallePaso(){
                 "&arrayPrecioProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayTotalProc=0,0,0,0,0,0,0,0,0,0,0,0"+
                 "&txt_cotizacion_comentarios="+"&txt_cotizacion_numero="+numeroCotizacion+
                 "&txt_cotizacion_margenvo=0"+
+                "&txt_cotizacion_utilidad=0"+
+                "&txt_cotizacion_totalnvo=0"+
+                "&txt_cotizacion_total_proceso=0"+
+                "&txt_cotizacion_margen_materiales=0"+
+                "&txt_cotizacion_utilidad_materiales=0"+
+                "&txt_cotizacion_total_materiales=0"+
                 "&sequencia="+sequence+"&correlativo=&accion="+accion,
         type : 'POST',
         dataType : "html",
@@ -560,9 +598,7 @@ function modificaDetalle(){
     var totalCrom=$("#txt_cotizacion_totalCrom").val();
     var valUnitario=$("#txt_cotizacion_valUnitario").val();
     var totales=$("#txt_cotizacion_totalProcesos").val();    
-    var margen=$("#txt_cotizacion_margenvo").val();
-    
-    
+   
     var numeroCotizacion=$("#txt_cotizacion_numero").val();
     var c_horas=$("#txt_cotizacion_cHora").val();
     var cantHoras=$("#txt_cotizacion_cantHrs").val();   
@@ -601,7 +637,17 @@ function modificaDetalle(){
     var matDescripcion5=$.trim($("#txt_cotizacion_materiales_descripcion5").val());
     var matCantidad15=$("#txt_cotizacion_materiales_cantidad5").val();
     var matPreciounitario5=$("#txt_cotizacion_materiales_preciounitario5").val();
-    var matTotalitem5=$("#txt_cotizacion_materiales_totalitem5").val();    
+    var matTotalitem5=$("#txt_cotizacion_materiales_totalitem5").val();
+    
+    //inicio modificacion
+    var margen = $("input[name='txt_cotizacion_margenvo']").val();
+    var utilidad = $("#txt_cotizacion_utilidad").val();
+    var totalProcesos = $("#txt_cotizacion_totalProcesos").val();
+    var totalNvo = $("#txt_cotizacion_totalnvo").val();
+    var margenMateriales = $("#txt_cotizacion_margen2").val();
+    var utilidadMateriales = $("#txt_cotizacion_utilidad2").val();
+    var totalNvoMateriales = $("#txt_cotizacion_total_nvo_2").val();
+    //fin modificacion
     
     var totalMateriales=$("#txt_cotizacion_totalMateriales").val();    
     //var totalGeneralCot=$("#txt_cotizacion_totalGeneral").val();  
@@ -744,6 +790,12 @@ function modificaDetalle(){
             arrayPrecioProc:JSON.stringify(precioProc),
             arrayTotalProc:JSON.stringify(totalProc),
             txt_cotizacion_margenvo:margen,
+            txt_cotizacion_utilidad:utilidad,
+            txt_cotizacion_totalnvo:totalNvo,
+            txt_cotizacion_total_proceso:totalProcesos,
+            txt_cotizacion_margen_materiales: margenMateriales,
+            txt_cotizacion_utilidad_materiales: utilidadMateriales,
+            txt_cotizacion_total_materiales: totalMateriales,
             sequencia:sequence,
             correlativo:correlativo
         },
@@ -834,6 +886,12 @@ function eliminaDetalle(){
                 "&arrayPrecioProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayTotalProc=0,0,0,0,0,0,0,0,0,0,0,0"+
                 "&txt_cotizacion_comentarios="+"&txt_cotizacion_numero="+numeroCotizacion+
                 "&txt_cotizacion_margenvo=0"+
+                "&txt_cotizacion_utilidad=0"+
+                "&txt_cotizacion_totalnvo=0"+
+                "&txt_cotizacion_total_proceso=0"+
+                "&txt_cotizacion_margen_materiales=0"+
+                "&txt_cotizacion_utilidad_materiales=0"+
+                "&txt_cotizacion_total_materiales=0"+
                 "&sequencia="+sequence+"&correlativo="+correlativo,
         type : 'POST',
         dataType : "html",
@@ -1350,11 +1408,13 @@ function cargaProcesos() {
             $("#txt_cotizacion_materiales_preciounitario5").val("0");
             $("#txt_cotizacion_materiales_totalitem5").val("0");
             
-            $("#txt_cotizacion_totalProcesos").val("0");
-            $("#txt_cotizacion_margenvo").val("0");
-            
+            $("#txt_cotizacion_totalProcesos").val("0");            
             $("#txt_cotizacion_totalMateriales").val("0");
             $("#txt_cotizacion_totalGeneral").val("0");
+            
+            $("#txt_cotizacion_margenvo").val("0");
+            $("#txt_cotizacion_utilidad").val("0");
+            $("#txt_cotizacion_totalnvo").val("0");
 
             }
         }
@@ -1393,7 +1453,13 @@ function limpiaProcesos() {
                 "&txt_cotizacion_totalGeneral=0"+"&iva=0"+"&totalbruto=0"+              
                 "&arrayCodProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayCantProc=0,0,0,0,0,0,0,0,0,0,0,0"+
                 "&arrayPrecioProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayTotalProc=0,0,0,0,0,0,0,0,0,0,0,0"+
-                 "&txt_cotizacion_margenvo=0"+
+                "&txt_cotizacion_margenvo=0"+
+                "&txt_cotizacion_utilidad=0"+
+                "&txt_cotizacion_totalnvo=0"+
+                "&txt_cotizacion_total_proceso=0"+
+                "&txt_cotizacion_margen_materiales=0"+
+                "&txt_cotizacion_utilidad_materiales=0"+
+                "&txt_cotizacion_total_materiales=0"+
                 "&txt_cotizacion_comentarios="+"&txt_cotizacion_numero="+numeroCotizacion+
                 "&sequencia="+sequence+"&correlativo="+correlativo,
         type : 'POST',
@@ -1736,7 +1802,7 @@ function cargaDatosProcesos(superModificado, cantidadModificado) {
     var areaPunto = $("#txt_cotizacion_area").val().replace(",",".");
     var cantidad = $("#txt_cotizacion_cantidad").val();
     var cantidadPunto = $("#txt_cotizacion_cantidad").val().replace(".","");
-    
+   
     
         $.ajax({
         url : 'ServletSPCotizacionDet', 
@@ -1765,13 +1831,23 @@ function cargaDatosProcesos(superModificado, cantidadModificado) {
                 "&txt_cotizacion_materiales_totalitem5=0"+"&txt_cotizacion_totalMateriales=0"+
                 "&txt_cotizacion_totalGeneral=0"+"&iva=0"+"&totalbruto=0"+              
                 "&arrayCodProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayCantProc=0,0,0,0,0,0,0,0,0,0,0,0"+
-                "&arrayPrecioProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayTotalProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&txt_cotizacion_margenvo=0"+
+                "&arrayPrecioProc=0,0,0,0,0,0,0,0,0,0,0,0"+"&arrayTotalProc=0,0,0,0,0,0,0,0,0,0,0,0"+
+                "&txt_cotizacion_margenvo="+"&txt_cotizacion_margenvo"+
+                "&txt_cotizacion_utilidad="+"&txt_cotizacion_utilidad"+
+                "&txt_cotizacion_totalnvo="+"&txt_cotizacion_totalnvo"+
                 "&txt_cotizacion_comentarios="+"&txt_cotizacion_numero="+numeroCotizacion+
+                "&txt_cotizacion_margenvo=0"+
+                "&txt_cotizacion_utilidad=0"+
+                "&txt_cotizacion_total_proceso=0"+
+                "&txt_cotizacion_totalnvo=0"+
+                "&txt_cotizacion_margen_materiales=0"+
+                "&txt_cotizacion_utilidad_materiales=0"+
+                "&txt_cotizacion_total_materiales=0"+
                 "&sequencia="+sequence+"&correlativo="+correlativo,
         type : 'POST',
         dataType : "html",
         async:false,
-        success : function(data) {
+        success : function(data){
             var obj = JSON.parse(data);
             
             for(var i = 0; i <= obj.procesos.cantproc.length;i++){
@@ -1897,8 +1973,19 @@ function cargaDatosProcesos(superModificado, cantidadModificado) {
             $("#txt_cotizacion_totalProcesos").val(arrResult[68]);
             $("#txt_cotizacion_totalMateriales").val(arrResult[69]);
             $("#txt_cotizacion_totalGeneral").val(arrResult[70]);
-            $("#txt_cotizacion_margenvo").val(arrResult[71]);
             
+            //inicio modificacion
+            $("input[name='txt_cotizacion_margenvo']").val(arrResult[73]);
+            $("#txt_cotizacion_utilidad").val(arrResult[74]);
+            $("#txt_cotizacion_totalnvo").val(arrResult[76]);
+            
+            $("#txt_cotizacion_margen2").val(arrResult[77]);
+            $("#txt_cotizacion_utilidad2").val(arrResult[78]);
+            $("#total_total_materiales").val(arrResult[79]);
+            
+            calculaCampoTotal("procesos");
+            calculaCampoTotal("materiales");
+            //fin modificacion
             
             if (superModificado == "Modificado" && cantidadModificado == "") {
                 $("#txt_cotizacion_cant1").val(area);

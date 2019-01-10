@@ -873,8 +873,8 @@ function loadDialogMaeClientes(){
                                          int ultimo =0;
                                          
                                          var = "select";    
-                                         System.out.println(corrCotiza);
-                                         sp_usu = _connMy.prepareCall("{call sp_cotizaciones_det(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                                         System.out.println("hh "+corrCotiza);
+                                         sp_usu = _connMy.prepareCall("{call sp_cotizaciones_det(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
                                         sp_usu.setString(1,var);
                                         sp_usu.setInt(2,0);
                                         sp_usu.setInt(3,0);
@@ -933,10 +933,17 @@ function loadDialogMaeClientes(){
                                         sp_usu.setString(55,"");
                                         sp_usu.setString(56,"");
                                         sp_usu.setString(57,"");
+                                        sp_usu.setString(58,"");
+                                        sp_usu.setString(59,"");
+                                        sp_usu.setString(60,"");
+                                        sp_usu.setString(61,"");
+                                        sp_usu.setString(62,"");
+                                        sp_usu.setString(63,"");
                                         
                                         sp_usu.registerOutParameter(1, Types.VARCHAR);
                                         sp_usu.execute();
                                         final ResultSet rsDetalle = sp_usu.getResultSet();
+                                        System.out.println("detalle RS " );
                                         claseGrilla = "";                                        
                                         while(rsDetalle.next())
                                         {
@@ -979,6 +986,8 @@ function loadDialogMaeClientes(){
                                         <td style="display:none;" id ="cotazacionDetTotalProcesos<%=cont%>"><%=rsDetalle.getString("totales")%></td>
                                         <td style="display:none;" id ="cotazacionDetTotalMateriales<%=cont%>"><%=rsDetalle.getString("total_materiales")%></td>-->
                                         <td style="display:none;" id ="cotazacionMargen<%=cont%>"><%=rsDetalle.getString("json_margen")%></td>
+                                        <td style="display:none;" id ="cotazacionUtilidad<%=cont%>"><%=rsDetalle.getString("json_utilidad")%></td>
+                                        <td style="display:none;" id ="cotazacionTotalNvo<%=cont%>"><%=rsDetalle.getString("json_totalnvo")%></td>
                                      <%
                                             out.print("</tr>");
                                             claseGrilla = "";

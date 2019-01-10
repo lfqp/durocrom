@@ -81,7 +81,16 @@ public class ServletSPCotizacionDet extends HttpServlet {
             String cantProc=request.getParameter("arrayCantProc");
             String precioProc=request.getParameter("arrayPrecioProc");
             String totalProc=request.getParameter("arrayTotalProc");
-            String margen=request.getParameter("arrayMargen");
+            
+            //inicio modificacion
+            String margen_procesos = request.getParameter("txt_cotizacion_margenvo").replace(".", "");
+            String utilidad_procesos = request.getParameter("txt_cotizacion_utilidad").replace(".", "");
+            String total_total_procesos = request.getParameter("txt_cotizacion_totalnvo").replace(".", "");
+            String total_procesos = request.getParameter("txt_cotizacion_total_proceso").replace(".", "");
+            String margen_materiales = request.getParameter("txt_cotizacion_margen_materiales").replace(".", "");
+            String utilidad_materiales = request.getParameter("txt_cotizacion_utilidad_materiales").replace(".", "");
+            String total_total_materiales = request.getParameter("txt_cotizacion_total_materiales").replace(".", "");
+            //fin modificacion
             
 //            String arrayCodProc [] = codProc.replace("\"", "").replace("[", "").replace("]", "").split(",");
 //            String arrayCantProc [] = cantProc.replace("\"", "").replace("[", "").replace("]", "").split(",");
@@ -186,7 +195,7 @@ public class ServletSPCotizacionDet extends HttpServlet {
                 _connMy = conexionBD.Conectar((String)s.getAttribute("organizacion")); 
                 CallableStatement sp_usu=null;
                            
-                sp_usu = _connMy.prepareCall("{call sp_cotizaciones_det(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+                sp_usu = _connMy.prepareCall("{call sp_cotizaciones_det(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
                 sp_usu.setString(1,opcion);
                 sp_usu.setInt(2,Integer.parseInt(numeroCotiza));
                 sp_usu.setInt(3,Integer.parseInt(correlativo));
@@ -292,7 +301,16 @@ public class ServletSPCotizacionDet extends HttpServlet {
                 sp_usu.setString(54,cantProc);
                 sp_usu.setString(55,precioProc);
                 sp_usu.setString(56,totalProc);
-                sp_usu.setString(57,margen);
+                
+                //inicio modificacion
+                sp_usu.setString(57,margen_procesos);
+                sp_usu.setString(58,utilidad_procesos);
+                sp_usu.setString(59,total_procesos);
+                sp_usu.setString(60,total_total_procesos);
+                sp_usu.setString(61,margen_materiales);
+                sp_usu.setString(62,utilidad_materiales);
+                sp_usu.setString(63,total_total_materiales);
+                //fin modificacion
                 
                 sp_usu.registerOutParameter(1, Types.VARCHAR);
                 
@@ -429,7 +447,16 @@ public class ServletSPCotizacionDet extends HttpServlet {
                             materiales += rs.getString("total_pieza")+"|";
                             materiales += rs.getString("iva")+"|";
                             materiales += rs.getString("total_bruto")+"|";
-                            materiales += rs.getString("json_margen")+"|";
+                            
+                            //inicio modificacion
+                            materiales += rs.getString("margen_procesos")+"|";
+                            materiales += rs.getString("utilidad_procesos")+"|";
+                            materiales += rs.getString("total_procesos")+"|";
+                            materiales += rs.getString("total_total_procesos")+"|";
+                            materiales += rs.getString("margen_materiales")+"|";
+                            materiales += rs.getString("utilidad_materiales")+"|";
+                            materiales += rs.getString("total_total_materiales")+"|";
+                            //fin modificacion
                             
                             salida += "{\"procesos\":{\"codproc\":" + rs.getString("json_codproc") + "," + 
                                 "\"cantproc\":"+ rs.getString("json_cantproc")+"," + 
